@@ -10,16 +10,16 @@ ORM means object relational mapper which is used in ruby on rails that maps the 
 Active Record - The Object/Relational Mapping (ORM) layer included with Rails is called Active Record. Active Records in Rails provide a connection and interface between relational database tables and Ruby computer code that manipulates database records.
 
 #### Rails Migration
-In Ruby on Rails, a migration is a powerful and essential feature that helps developers manage the database schema and make changes to it over time in a structured and organized manner. 
+Migrations are a convenient way to alter your database schema over time in a consistent way. They use a Ruby DSL so that you don't have to write SQL by hand, allowing your schema and changes to be database independent.
    These are few features provided by rails migration:
     
    * Database Independence
    * Schema Evolution
    * Version Control
    * Creating Migrations - 
-    ```ruby
-    rails generate migration CreateProducts
-    ```
+   ```ruby
+   rails generate migration CreateProducts
+   ```
    * Editing Migrations
    * Running Migrations - 
    ```ruby
@@ -96,4 +96,30 @@ end
 ```ruby
 rails db:seed
 ```
+#### Create a table
+```ruby
+rails generate migration create_authors
+```
+
+This will create a file in the directory named db/migrate with a timestamp. 
+```ruby
+class CreateAuthors < ActiveRecord::Migration[6.0]
+  def change
+    create_table :authors do |t|
+      t.string :first_name
+      t.string :last_name
+      t.string :email
+      t.string :phone_no
+      t.text :about
+      t.timestamps
+    end
+  end
+end
+```
+
+To update the changes defined in the migration 
+```ruby
+rails db:migrate
+```
+
 
